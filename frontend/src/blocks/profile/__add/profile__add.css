@@ -1,0 +1,15 @@
+.profile__add {
+  height: 22px;
+  width: 22px;
+  padding: 14px 64px;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 420px) {
+  .profile__add {
+    height: 16px;
+    width: 16px;
+    padding: 15px 131px;
+  }
+}

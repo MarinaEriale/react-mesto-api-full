@@ -1,0 +1,13 @@
+.element__like-button {
+  border: 0;
+  padding: 22px 0 3px 0;
+  width: 22px;
+  height: 19px;
+  transition: opacity .8s ease-in-out;
+  background: url(../../../image/Vector_heart.svg) center no-repeat;
+}
+
+.element__like-button:hover {
+  cursor: pointer;
+  opacity: .5;
+}

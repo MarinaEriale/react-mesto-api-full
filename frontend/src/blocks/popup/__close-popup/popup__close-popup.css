@@ -1,0 +1,31 @@
+.popup__close-popup {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  z-index: 2;
+  transition: opacity .8s ease-in-out;
+}
+
+@media screen and (max-width: 620px){
+  .popup__close-popup {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .popup__close-popup {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+  }
+}
+
+.popup__close-popup:hover {
+  opacity: .6;
+  cursor: pointer;
+}

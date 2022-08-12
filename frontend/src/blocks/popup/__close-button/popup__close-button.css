@@ -1,0 +1,12 @@
+.popup__close-button {
+  width: 32px;
+  height: 32px;
+  z-index: 3;
+}
+
+@media screen and (max-width: 540px) {
+  .popup__close-button {
+    width: 20px;
+    height: 20px;
+  }
+}

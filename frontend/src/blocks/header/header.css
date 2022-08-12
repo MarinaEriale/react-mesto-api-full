@@ -1,0 +1,32 @@
+.header {
+    width: calc(100% - 2*200px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 200px 40px 200px;
+    padding-top: 45px;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    margin-right: 100px;
+    margin-left: 100px;
+    width: calc(100% - 2*100px);
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .header {
+    margin-left: 50px;
+    margin-right: 50px;
+    width: calc(100% - 2*50px);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .header {
+    margin: 28px 0 42px 0;
+    width: calc(100% - 2px);
+  }
+}

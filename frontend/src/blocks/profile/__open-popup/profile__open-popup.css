@@ -1,0 +1,13 @@
+.profile__open-popup {
+  border: 0;
+  background: transparent;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  transition: opacity .8s linear;
+}
+
+.profile__open-popup:hover {
+  opacity: .6;
+  cursor: pointer;
+}

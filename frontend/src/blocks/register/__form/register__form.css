@@ -1,0 +1,6 @@
+.register__form {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
