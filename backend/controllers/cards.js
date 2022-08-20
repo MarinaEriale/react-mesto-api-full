@@ -9,7 +9,7 @@ const ForbiddenError = require('../errors/forbidden-err');
 exports.getCards = (req, res, next) => {
   cardModel
     .find({})
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch(() => next(new ErrorDefault('Ошибка сервера')));
 };
 

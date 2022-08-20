@@ -32,7 +32,7 @@ function Register() {
         if (res.status !== 400) {
           setIsSuccessOpen(true);
           setTimeout(() => {
-            navigate("/login");
+            navigate("/signin");
             setIsSuccessOpen(false);
           }, 2000);
         }

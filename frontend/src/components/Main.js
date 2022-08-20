@@ -5,7 +5,7 @@ import profileAdd from "../image/Vector_plus.svg";
 import Card from "./Card";
 
 function Main(props) {
-  
+
   const currentUser = React.useContext(CurrentUserContext);  
 
   return (
@@ -16,12 +16,12 @@ function Main(props) {
             onClick={props.handleEditAvatarClick}
             type="button"
             className="profile__avatar-edit"
-            style={{ backgroundImage: `url(${currentUser.avatar})` }}
+            style={{ backgroundImage: `url(${currentUser.data.avatar})` }}
           >
             {/* <img alt="Аватар пользователя" className="profile__avatar" /> */}
           </button>
           <div className="profile__info">
-            <h1 className="profile__name">{currentUser.name}</h1>
+            <h1 className="profile__name">{currentUser.data.name}</h1>
             <button
               onClick={props.handleEditProfileClick}
               type="button"
@@ -33,7 +33,7 @@ function Main(props) {
                 className="profile__edit"
               />
             </button>
-            <p className="profile__profession">{currentUser.about}</p>
+            <p className="profile__profession">{currentUser.data.about}</p>
           </div>
         </div>
         <button

@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { default: mongoose } = require('mongoose');
 const { errors } = require('celebrate');
+const crypto = require('crypto');
 const userRoutes = require('./routes/users'); // импортируем роутер
 const cardRoutes = require('./routes/cards');
 const { createUser, login } = require('./controllers/user');

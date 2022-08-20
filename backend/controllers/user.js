@@ -6,9 +6,11 @@ const NotFoundError = require('../errors/not-found-err');
 const ErrorDefault = require('../errors/error-default');
 const AlreadyExistsError = require('../errors/already-exists-err');
 
+const { JWT_SECRET } = process.env;
+
 exports.getUsers = (req, res, next) => {
   userModel
-    .find({}, ['name', 'about', 'avatar', '_id', 'email'])
+    .find({})
     .then((user) => {
       console.log(user);
       res.send({ data: user });
@@ -119,12 +121,7 @@ exports.updateAvatar = (req, res, next) => {
       if (user === null) {
         return next(new NotFoundError('Пользователь не был найден'));
       }
-      return res.send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-      });
+      return res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -142,7 +139,7 @@ exports.login = (req, res, next) => {
       // создадим токен
       const token = jwt.sign(
         { _id: user._id },
-        'super-strong-secret',
+        JWT_SECRET,
         { expiresIn: '7d' },
       );
 
@@ -161,13 +158,7 @@ exports.getMeEndpoint = (req, res, next) => {
       if (user === null) {
         return next(new NotFoundError('Пользователь не был найден'));
       }
-      return res.send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-        email: user.email,
-      });
+      return res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {

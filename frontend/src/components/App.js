@@ -28,12 +28,15 @@ function App() {
   const [selectedCard, setselectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  
+    
 
   React.useEffect(() => {
     api
       .getCards()
-      .then((data) => setCards(data))
+      .then((data) => {        
+        setCards(data)        
+      })
+      
       .catch((err) => console.log("Ошибка", err));
   }, []);
 
@@ -41,15 +44,15 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     api.changeCardLike(card._id, !isLiked).then((newCard) => {
-        setCards((state) =>
-        state.map((c) => (c._id === newCard._id ? newCard : c))
-      );
+    
+        setCards((state) => state.map((c) => (c._id === newCard._id ? newCard : c)));
+      
     })
     .catch((err) => console.log("Ошибка", err));
   }
 
   function handleCardDelete(card) {
-    console.log(card);
+    // console.log(card._id);
     api.deleteCard(card._id).then(() => {
       setCards(cards.filter((item) => item._id !== card._id));
     })
@@ -150,7 +153,7 @@ function App() {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
     setEmail(''); 
-    navigate('/login')
+    navigate('/signin')
   }
 
   return (
@@ -159,8 +162,8 @@ function App() {
         <div className="page">
           <Header onLogout={handleLogout} loggedIn={loggedIn} email={email} />
             <Routes>
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login onLogin={handleLogin} />} />
+              <Route path="/signup" element={<Register />} />
+              <Route path="/signin" element={<Login onLogin={handleLogin} />} />
               <Route
                 exact
                 path="/"
