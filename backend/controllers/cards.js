@@ -59,9 +59,7 @@ module.exports.createCard = (req, res, next) => {
       likes: card.likes,
       link: card.link,
       name: card.name,
-      owner: {
-        _id: ownerId,
-      },
+      owner: ownerId,
       _id: card._id,
     }))
     // данные не записались, вернём ошибку
@@ -90,9 +88,7 @@ module.exports.likeCard = (req, res, next) => {
         likes: card.likes,
         link: card.link,
         name: card.name,
-        owner: {
-          _id: ownerId,
-        },
+        owner: ownerId,
         _id: card._id,
       });
     })
@@ -124,9 +120,7 @@ module.exports.dislikeCard = (req, res, next) => {
         likes: card.likes,
         link: card.link,
         name: card.name,
-        owner: {
-          _id: ownerId,
-        },
+        owner: ownerId,
         _id: card._id,
       });
     })

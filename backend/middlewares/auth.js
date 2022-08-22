@@ -23,5 +23,3 @@ exports.auth = (req, res, next) => {
 
   return next(); // пропускаем запрос дальше
 };
-
-// 'super-strong-secret'
