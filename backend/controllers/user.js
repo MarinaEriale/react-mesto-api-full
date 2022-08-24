@@ -25,12 +25,7 @@ exports.getUserById = (req, res, next) => {
       if (user === null) {
         return next(new NotFoundError('Пользователь не был найден'));
       }
-      return res.send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-      });
+      return res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -89,12 +84,7 @@ exports.updateProfile = (req, res, next) => {
       if (user === null) {
         return next(new NotFoundError('Пользователь не был найден'));
       }
-      return res.send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-      });
+      return res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

@@ -26,11 +26,6 @@ exports.deleteCard = (req, res, next) => {
         .then((deletedCard) => {
           res.status(200).send({ data: deletedCard });
         })
-      // return cardModel
-      //   .findByIdAndRemove(req.params.cardId)
-      //   .then((deletedCard) => {
-      //     res.status(200).send({ data: deletedCard });
-      //   })
         .catch((err) => {
           if (err.name === 'CastError') {
             return next(new IncorrectQueryError('Передан не валидный id'));
@@ -72,7 +67,7 @@ module.exports.createCard = (req, res, next) => {
 };
 
 module.exports.likeCard = (req, res, next) => {
-  const ownerId = req.user._id;
+  // const ownerId = req.user._id;
   cardModel
     .findByIdAndUpdate(
       req.params.cardId,
@@ -83,14 +78,7 @@ module.exports.likeCard = (req, res, next) => {
       if (card === null) {
         return next(new NotFoundError('Карточка не была найдена'));
       }
-      return res.send({
-        createdAt: card.createdAt,
-        likes: card.likes,
-        link: card.link,
-        name: card.name,
-        owner: ownerId,
-        _id: card._id,
-      });
+      return res.send({ card });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -104,7 +92,7 @@ module.exports.likeCard = (req, res, next) => {
 };
 
 module.exports.dislikeCard = (req, res, next) => {
-  const ownerId = req.user._id;
+  // const ownerId = req.user._id;
   cardModel
     .findByIdAndUpdate(
       req.params.cardId,
@@ -115,14 +103,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (card === null) {
         return next(new NotFoundError('Карточка не была найдена'));
       }
-      return res.send({
-        createdAt: card.createdAt,
-        likes: card.likes,
-        link: card.link,
-        name: card.name,
-        owner: ownerId,
-        _id: card._id,
-      });
+      return res.send({ card });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

@@ -31,22 +31,22 @@ function App() {
     
 
   React.useEffect(() => {
-    api
+    if (localStorage.getItem("jwt")) {
+      api
       .getCards()
       .then((data) => {        
-        setCards(data)        
-      })
-      
+        setCards(data)   
+      })      
       .catch((err) => console.log("Ошибка", err));
+    }     
   }, []);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    console.log(card);
+    const isLiked = card.likes.some((i) => i._id === currentUser.data._id);
 
     api.changeCardLike(card._id, !isLiked).then((newCard) => {
-    
-        setCards((state) => state.map((c) => (c._id === newCard._id ? newCard : c)));
-      
+        setCards((state) => state.map((c) => (c._id === newCard._id ? newCard : c)));      
     })
     .catch((err) => console.log("Ошибка", err));
   }
@@ -60,12 +60,14 @@ function App() {
   }
 
   React.useEffect(() => {
-    api
+    if (localStorage.getItem("jwt")) {
+      api
       .getUserInfo()
       .then((userInfo) => {
         setCurrentUser(userInfo);
       })
       .catch((err) => console.log("Ошибка", err));
+    }   
   }, []);
 
   function handleUpdateUser(data) {
