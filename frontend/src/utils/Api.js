@@ -82,7 +82,8 @@ export class Api {
 }
 
 const api = new Api({
-  url:'http://localhost:3000',
+  // url:'http://localhost:3000',
+  url:'https://api.marina.place.nomoredomains.sbs',
 });
 
 export default api;

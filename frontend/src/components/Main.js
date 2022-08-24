@@ -8,6 +8,8 @@ function Main(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
+  console.log(currentUser.data);
+
   return (
     <main>
       <section className="profile">
@@ -18,7 +20,6 @@ function Main(props) {
             className="profile__avatar-edit"
             style={{ backgroundImage: `url(${currentUser.data.avatar})` }}
           >
-            {/* <img alt="Аватар пользователя" className="profile__avatar" /> */}
           </button>
           <div className="profile__info">
             <h1 className="profile__name">{currentUser.data.name}</h1>
