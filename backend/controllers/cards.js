@@ -9,7 +9,7 @@ const ForbiddenError = require('../errors/forbidden-err');
 exports.getCards = (req, res, next) => {
   cardModel
     .find({})
-    .then((card) => res.send(card))
+    .then((card) => res.send({ data: card }))
     .catch(() => next(new ErrorDefault('Ошибка сервера')));
 };
 
@@ -26,6 +26,11 @@ exports.deleteCard = (req, res, next) => {
         .then((deletedCard) => {
           res.status(200).send({ data: deletedCard });
         })
+      // return cardModel
+      //   .findByIdAndRemove(req.params.cardId)
+      //   .then((deletedCard) => {
+      //     res.status(200).send({ data: deletedCard });
+      //   })
         .catch((err) => {
           if (err.name === 'CastError') {
             return next(new IncorrectQueryError('Передан не валидный id'));
@@ -49,14 +54,7 @@ module.exports.createCard = (req, res, next) => {
   cardModel
     .create({ name, link, owner: ownerId }) // создадим документ на основе пришедших данных
     // вернём записанные в базу данные
-    .then((card) => res.send({
-      createdAt: card.createdAt,
-      likes: card.likes,
-      link: card.link,
-      name: card.name,
-      owner: ownerId,
-      _id: card._id,
-    }))
+    .then((card) => res.send({ data: card }))
     // данные не записались, вернём ошибку
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -78,7 +76,7 @@ module.exports.likeCard = (req, res, next) => {
       if (card === null) {
         return next(new NotFoundError('Карточка не была найдена'));
       }
-      return res.send({ card });
+      return res.send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -103,7 +101,7 @@ module.exports.dislikeCard = (req, res, next) => {
       if (card === null) {
         return next(new NotFoundError('Карточка не была найдена'));
       }
-      return res.send({ card });
+      return res.send({ data: card });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

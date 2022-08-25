@@ -5,10 +5,10 @@ import profileAdd from "../image/Vector_plus.svg";
 import Card from "./Card";
 
 function Main(props) {
-
-  const currentUser = React.useContext(CurrentUserContext);
-
-  console.log(currentUser.data);
+  
+  console.log(props.cards.data);
+  
+  const currentUser = React.useContext(CurrentUserContext);  
 
   return (
     <main>
@@ -18,11 +18,12 @@ function Main(props) {
             onClick={props.handleEditAvatarClick}
             type="button"
             className="profile__avatar-edit"
-            style={{ backgroundImage: `url(${currentUser.data.avatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           >
+            {/* <img alt="Аватар пользователя" className="profile__avatar" /> */}
           </button>
           <div className="profile__info">
-            <h1 className="profile__name">{currentUser.data.name}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               onClick={props.handleEditProfileClick}
               type="button"
@@ -34,7 +35,7 @@ function Main(props) {
                 className="profile__edit"
               />
             </button>
-            <p className="profile__profession">{currentUser.data.about}</p>
+            <p className="profile__profession">{currentUser.about}</p>
           </div>
         </div>
         <button
@@ -52,8 +53,9 @@ function Main(props) {
       </section>
       <section className="elements" id="elements">
         <div className="elements__list" id="elements-container">
-          {props.cards.map((item) => {
-            return (
+          {/* {props.cards.data.map((item) => { */}
+          {props.cards.data.map((item) => (
+            //  return (
               <Card
                 data={item}
                 key={item._id}
@@ -61,8 +63,8 @@ function Main(props) {
                 onCardLike={props.onCardLike}
                 onCardDelete={props.onCardDelete}
               />
-            );
-          })}
+            
+          ))}
         </div>
       </section>
     </main>

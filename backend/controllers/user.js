@@ -6,11 +6,11 @@ const NotFoundError = require('../errors/not-found-err');
 const ErrorDefault = require('../errors/error-default');
 const AlreadyExistsError = require('../errors/already-exists-err');
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'some-secret-key' } = process.env;
 
 exports.getUsers = (req, res, next) => {
   userModel
-    .find({})
+    .find({}, ['name', 'about', 'avatar', '_id', 'email'])
     .then((user) => {
       console.log(user);
       res.send({ data: user });
@@ -25,7 +25,12 @@ exports.getUserById = (req, res, next) => {
       if (user === null) {
         return next(new NotFoundError('Пользователь не был найден'));
       }
-      return res.send({ data: user });
+      return res.send({
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
+      });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -84,7 +89,12 @@ exports.updateProfile = (req, res, next) => {
       if (user === null) {
         return next(new NotFoundError('Пользователь не был найден'));
       }
-      return res.send({ data: user });
+      return res.send({
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
+      });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -111,7 +121,12 @@ exports.updateAvatar = (req, res, next) => {
       if (user === null) {
         return next(new NotFoundError('Пользователь не был найден'));
       }
-      return res.send({ data: user });
+      return res.send({
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
+      });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -148,7 +163,13 @@ exports.getMeEndpoint = (req, res, next) => {
       if (user === null) {
         return next(new NotFoundError('Пользователь не был найден'));
       }
-      return res.send({ data: user });
+      return res.send({
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
+        email: user.email,
+      });
     })
     .catch((err) => {
       if (err.name === 'CastError') {

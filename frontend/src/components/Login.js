@@ -22,8 +22,8 @@ function Login({ onLogin }) {
     e.preventDefault();
       auth
         .authorize(values.email, values.password)
-        .then((res) => {          
-          if (res.token) {
+        .then((res) => {
+            if (res.token) {
             setValues({
               email: "",
               password: "",
