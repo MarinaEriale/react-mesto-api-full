@@ -6,7 +6,7 @@ const NotFoundError = require('../errors/not-found-err');
 const ErrorDefault = require('../errors/error-default');
 const AlreadyExistsError = require('../errors/already-exists-err');
 
-const { JWT_SECRET = 'some-secret-key' } = process.env;
+const { JWT_SECRET } = process.env;
 
 exports.getUsers = (req, res, next) => {
   userModel
