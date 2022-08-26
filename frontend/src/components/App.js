@@ -33,15 +33,15 @@ function App() {
     console.log(cards)
   }, [cards]);
   
-  React.useEffect(() => {
-    if (localStorage.getItem("jwt")) {
+   React.useEffect(() => {
+    if (localStorage.getItem("jwt") && loggedIn) {
       api
         .getCards()
         .then((cards) => {
           setCards(cards.data)})
         .catch((err) => console.log("Ошибка", err));
     }
-  }, []);
+  }, [loggedIn]);
 
     function handleCardLike(card) {
     
@@ -69,7 +69,7 @@ function App() {
   }
 
   React.useEffect(() => {
-    if (localStorage.getItem("jwt")) {
+    if (localStorage.getItem("jwt") && loggedIn) {
       api
       .getUserInfo()
       .then((userInfo) => {
@@ -78,7 +78,8 @@ function App() {
       })
       .catch((err) => console.log("Ошибка", err));
     }    
-  }, []);
+  }, [loggedIn]);
+
 
   function handleUpdateUser(data) {
     api

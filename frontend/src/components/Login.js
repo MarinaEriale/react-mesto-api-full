@@ -23,7 +23,9 @@ function Login({ onLogin }) {
       auth
         .authorize(values.email, values.password)
         .then((res) => {
+            console.log(res);
             if (res.token) {
+             console.log(res.token);
             setValues({
               email: "",
               password: "",
