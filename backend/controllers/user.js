@@ -30,6 +30,7 @@ exports.getUserById = (req, res, next) => {
         about: user.about,
         avatar: user.avatar,
         _id: user._id,
+        email: user.email,
       });
     })
     .catch((err) => {
@@ -94,6 +95,7 @@ exports.updateProfile = (req, res, next) => {
         about: user.about,
         avatar: user.avatar,
         _id: user._id,
+        email: user.email,
       });
     })
     .catch((err) => {
@@ -126,6 +128,7 @@ exports.updateAvatar = (req, res, next) => {
         about: user.about,
         avatar: user.avatar,
         _id: user._id,
+        email: user.email,
       });
     })
     .catch((err) => {

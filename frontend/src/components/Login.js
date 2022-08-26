@@ -33,7 +33,7 @@ function Login({ onLogin }) {
             navigate("/");
           }          
         })
-        .catch((err) => console.log(`Error ${err.message} for data: ${data}`));
+        .catch((err) => console.log("Ошибка", err));
   };
 
   return (
