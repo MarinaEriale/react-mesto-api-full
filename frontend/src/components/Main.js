@@ -6,7 +6,9 @@ import Card from "./Card";
 
 function Main(props) {
   
-  console.log(props.cards.data);
+  React.useEffect(() => {
+    console.log(props.cards)
+  }, [])
   
   const currentUser = React.useContext(CurrentUserContext);  
 
@@ -54,7 +56,7 @@ function Main(props) {
       <section className="elements" id="elements">
         <div className="elements__list" id="elements-container">
           {/* {props.cards.data.map((item) => { */}
-          {props.cards.data.map((item) => (
+          {props.cards && props.cards.map((item) => (
             //  return (
               <Card
                 data={item}

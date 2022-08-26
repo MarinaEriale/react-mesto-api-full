@@ -34,28 +34,51 @@ function App() {
   }, [cards]);
   
 
+  // React.useEffect(() => {
+  //   if (localStorage.getItem("jwt")) {
+  //     api
+  //     .getCards()
+  //     .then((data) => setCards(data))
+  //     .catch((err) => console.log("Ошибка", err));
+  //   }    
+  // }, []);
+
   React.useEffect(() => {
     if (localStorage.getItem("jwt")) {
       api
-      .getCards()
-      .then((data) => setCards(data))
-      .catch((err) => console.log("Ошибка", err));
-    }    
+        .getCards()
+        .then((cards) => {
+          setCards(cards.data)})
+        .catch((err) => console.log("Ошибка", err));
+    }
   }, []);
 
+  // function handleCardLike(card) {
+  //   const isLiked = card.likes.some((i) => i === currentUser._id);
+    
+  //   api.changeCardLike(card._id, !isLiked).then((newCard) => {     
+  //      setCards((state) => {
+  //       const newState = state.data;
+  //       console.log('state', state);
+  //       console.log('newCard', newCard)
+  //       newState.map((c) => (c._id === newCard.data._id ? newCard.data : c))      
+  //      }         
+  //     );
+  //   })
   function handleCardLike(card) {
+    console.log('Кард', card)
+    console.log('Кард лайкс', card.likes)
     const isLiked = card.likes.some((i) => i === currentUser._id);
     
-    api.changeCardLike(card._id, !isLiked).then((newCard) => {     
-       setCards((state) => {
-        const newState = state.data;
-        newState.map((c) => (c._id === newCard.data._id ? newCard.data : c))      
-       }         
-      );
-    })
-    .catch((err) => console.log("Ошибка", err));
+    api
+      .changeCardLike(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === newCard._id ? newCard : c))
+        );
+      })
+      .catch((err) => console.log("Ошибка", err));
   }
-
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
       const newCards = cards.data
