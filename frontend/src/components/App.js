@@ -28,6 +28,9 @@ function App() {
   const [selectedCard, setselectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
 
   React.useEffect(() => {
     console.log(cards)
@@ -135,9 +138,7 @@ function App() {
     setselectedCard(null);
   }
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  
 
   React.useEffect(() => {
     handleTokenCheck();
