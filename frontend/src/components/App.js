@@ -33,16 +33,6 @@ function App() {
     console.log(cards)
   }, [cards]);
   
-
-  // React.useEffect(() => {
-  //   if (localStorage.getItem("jwt")) {
-  //     api
-  //     .getCards()
-  //     .then((data) => setCards(data))
-  //     .catch((err) => console.log("Ошибка", err));
-  //   }    
-  // }, []);
-
   React.useEffect(() => {
     if (localStorage.getItem("jwt")) {
       api
@@ -53,36 +43,27 @@ function App() {
     }
   }, []);
 
-  // function handleCardLike(card) {
-  //   const isLiked = card.likes.some((i) => i === currentUser._id);
+    function handleCardLike(card) {
     
-  //   api.changeCardLike(card._id, !isLiked).then((newCard) => {     
-  //      setCards((state) => {
-  //       const newState = state.data;
-  //       console.log('state', state);
-  //       console.log('newCard', newCard)
-  //       newState.map((c) => (c._id === newCard.data._id ? newCard.data : c))      
-  //      }         
-  //     );
-  //   })
-  function handleCardLike(card) {
-    console.log('Кард', card)
-    console.log('Кард лайкс', card.likes)
     const isLiked = card.likes.some((i) => i === currentUser._id);
-    
+            
     api
       .changeCardLike(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === newCard._id ? newCard : c))
-        );
+          state.map((c) => {
+            if(c._id === newCard.data._id) {
+              return newCard.data;
+            }
+            return c;
+          }));
       })
       .catch((err) => console.log("Ошибка", err));
   }
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
-      const newCards = cards.data
-      setCards(newCards.filter((item) => item._id !== card._id));
+      // const newCards = cards.data
+      setCards(cards.filter((item) => item._id !== card._id));
     })
     .catch((err) => console.log("Ошибка", err));
   }
@@ -92,6 +73,7 @@ function App() {
       api
       .getUserInfo()
       .then((userInfo) => {
+        // console.log(userInfo);
         setCurrentUser(userInfo);
       })
       .catch((err) => console.log("Ошибка", err));
@@ -112,7 +94,7 @@ function App() {
     api
       .addNewCard(data)
       .then((newCard) => {
-        setCards([newCard.data, ...cards.data]);
+        setCards([newCard.data, ...cards]);
         closeAllPopups();
       })
       .catch((err) => console.log("Ошибка", err));

@@ -10,7 +10,9 @@ function Main(props) {
     console.log(props.cards)
   }, [])
   
-  const currentUser = React.useContext(CurrentUserContext);  
+  const currentUser = React.useContext(CurrentUserContext); 
+
+  // console.log(currentUser)
 
   return (
     <main>

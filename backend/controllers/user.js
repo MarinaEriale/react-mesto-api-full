@@ -6,7 +6,7 @@ const NotFoundError = require('../errors/not-found-err');
 const ErrorDefault = require('../errors/error-default');
 const AlreadyExistsError = require('../errors/already-exists-err');
 
-const { JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 exports.getUsers = (req, res, next) => {
   userModel
@@ -144,7 +144,7 @@ exports.login = (req, res, next) => {
       // создадим токен
       const token = jwt.sign(
         { _id: user._id },
-        JWT_SECRET,
+        NODE_ENV === 'production' ? JWT_SECRET : 'very-strong-secret',
         { expiresIn: '7d' },
       );
 

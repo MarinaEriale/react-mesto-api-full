@@ -3,6 +3,9 @@ import cardDelete from "../image/vector_delete.svg";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Card(props) {
+
+  // console.log('Пропс дата', props.data);
+
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwn = props.data.owner === currentUser._id;
@@ -13,9 +16,9 @@ function Card(props) {
 
   const isLiked = props.data.likes.some((i) => i === currentUser._id);
 
-  console.log(props);
-
-  // .console.log(isLiked);
+  // console.log('props.data.likes', props.data.likes);
+  // console.log('currentUser._id', currentUser._id);
+  // console.log(isLiked);
 
   const cardLikeButtonClassName = `element__like-button ${
     isLiked ? "element__like-button_active" : ""
